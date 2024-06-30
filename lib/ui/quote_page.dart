@@ -139,9 +139,18 @@ class _QuotePageState extends State<QuotePage> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  (state is !LoadingFetchRandomQuote)?
                   BlocProvider.of<QuoteBloc>(context).add(
                     FetchRandomQuoteEvent(),
-                  );
+                  ):ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(seconds: 1),
+                            content: Text(
+                              "quote not fetched yet!!!",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        );
                 },
                 child: const Icon(Icons.refresh),
               ),
