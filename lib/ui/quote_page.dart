@@ -93,7 +93,8 @@ class _QuotePageState extends State<QuotePage> {
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(
+              IconButton(
+                tooltip: "save",
                 onPressed: () {
                   (state is FetchRandomQuoteState)
                       ? BlocProvider.of<QuoteListBloc>(context).add(
@@ -110,12 +111,13 @@ class _QuotePageState extends State<QuotePage> {
                           ),
                         );
                 },
-                child: const Icon(Icons.save),
+                icon: const Icon(Icons.save),
               ),
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
+              IconButton(
+                tooltip: "share",
                 onPressed: () {
                   (state is FetchRandomQuoteState)
                       ? Share.share('''${state.quote}
@@ -132,17 +134,19 @@ class _QuotePageState extends State<QuotePage> {
                           ),
                         );
                 },
-                child: const Icon(Icons.share),
+                icon: const Icon(Icons.share),
               ),
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
+              IconButton(
+                tooltip: "refresh",
                 onPressed: () {
-                  (state is !LoadingFetchRandomQuote)?
-                  BlocProvider.of<QuoteBloc>(context).add(
-                    FetchRandomQuoteEvent(),
-                  ):ScaffoldMessenger.of(context).showSnackBar(
+                  (state is! LoadingFetchRandomQuote)
+                      ? BlocProvider.of<QuoteBloc>(context).add(
+                          FetchRandomQuoteEvent(),
+                        )
+                      : ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             duration: Duration(seconds: 1),
                             content: Text(
@@ -152,12 +156,13 @@ class _QuotePageState extends State<QuotePage> {
                           ),
                         );
                 },
-                child: const Icon(Icons.refresh),
+                icon: const Icon(Icons.refresh),
               ),
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
+              IconButton(
+                tooltip: "copy",
                 onPressed: () {
                   (state is FetchRandomQuoteState)
                       ? {
@@ -176,7 +181,7 @@ class _QuotePageState extends State<QuotePage> {
                           ),
                         );
                 },
-                child: const Icon(Icons.copy),
+                icon: const Icon(Icons.copy),
               ),
             ],
           ),
