@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:learn/bloc/bloc/quote_bloc.dart";
-import "package:learn/bloc1/bloc/quote_list_bloc.dart";
+import "package:learn/quotebloc/bloc/quote_bloc.dart";
+import "package:learn/quotelistbloc/bloc/quote_list_bloc.dart";
 import "package:learn/ui/quote_page.dart";
 
 void main() {

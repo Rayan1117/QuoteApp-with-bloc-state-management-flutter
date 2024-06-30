@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learn/bloc1/bloc/quote_list_bloc.dart';
+import 'package:learn/quotelistbloc/bloc/quote_list_bloc.dart';
 
 class SavedQuotesPage extends StatefulWidget {
   const SavedQuotesPage({super.key});
