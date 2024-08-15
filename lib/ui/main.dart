@@ -1,30 +1,30 @@
+import "dart:convert";
+
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
-import "package:learn/quotebloc/bloc/quote_bloc.dart";
-import "package:learn/quotelistbloc/bloc/quote_list_bloc.dart";
-import "package:learn/ui/quote_page.dart";
+import "package:http/http.dart" as http;
+import "package:learn/ui/login_page.dart";
 
 void main() {
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<QuoteBloc>(
-        create: (context) => QuoteBloc(),
-      ),BlocProvider<QuoteListBloc>(
-        create: (context) => QuoteListBloc(),
-      ),
-    ],
-    child: const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: QuoteApp(),
-    ),
-  ));
+  runApp(const MyApp());
 }
 
-class QuoteApp extends StatelessWidget {
-  const QuoteApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const QuotePage();
+    return MaterialApp(
+      home: AuthencationPage()
+    );
+  }
+
+  Future<String> getResponse() async {
+    try{
+    final response = await http.get(Uri.parse("http://10.0.2.2:8000/getname"));
+    final body = jsonDecode(response.body);
+    return body['message'];
+    }catch(err){
+      return err.toString();
+    }
   }
 }
