@@ -1,11 +1,15 @@
-import "dart:convert";
-
 import "package:flutter/material.dart";
-import "package:http/http.dart" as http;
-import "package:learn/ui/login_page.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:learn/loginbloc/login_bloc.dart";
+import "package:learn/ui/registration_page.dart";
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => LoginBloc(),
+      child: const MaterialApp(home: MyApp()),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,18 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AuthencationPage()
-    );
-  }
-
-  Future<String> getResponse() async {
-    try{
-    final response = await http.get(Uri.parse("http://10.0.2.2:8000/getname"));
-    final body = jsonDecode(response.body);
-    return body['message'];
-    }catch(err){
-      return err.toString();
-    }
+    return const AuthencationPage();
   }
 }
